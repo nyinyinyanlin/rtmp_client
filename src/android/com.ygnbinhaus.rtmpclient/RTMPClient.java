@@ -18,10 +18,10 @@ import org.json.JSONObject;
 
 import java.io.File;
 
-public class RTMP-Client extends CordovaPlugin {
+public class RTMPClient extends CordovaPlugin {
     public final static String BROADCAST_LISTENER = "com.ygnbinhaus.rtmpclient.results";
     public final static String BROADCAST_FILTER = "com.ygnbinhaus.rtmpclient";
-    private final static String TAG = "RTMP-Client";
+    private final static String TAG = "RTMPClient";
     private static final String RECORD_AUDIO = Manifest.permission.RECORD_AUDIO;
     private static final String CAMERA = Manifest.permission.CAMERA;
     private static final String WRITE_EXTERNAL_STORAGE = Manifest.permission.WRITE_EXTERNAL_STORAGE;

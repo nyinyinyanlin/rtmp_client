@@ -47,7 +47,7 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp {
+public class RTMPStreamer extends CordovaActivity implements ConnectCheckerRtmp {
     // 90, 180, 270 or 0
     private final String[] _orient = new String[]{"90", "180", "270", "0"};
     SurfaceView surfaceView;
@@ -129,7 +129,7 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     @Override
     public void onConnectionSuccessRtmp() {
         VideoStream.sendBroadCast(activity, "onConnectionSuccess");
-        runOnUiThread(() -> Toast.makeText(RTMP_Streamer.this, "Connection success", Toast.LENGTH_SHORT)
+        runOnUiThread(() -> Toast.makeText(RTMPStreamer.this, "Connection success", Toast.LENGTH_SHORT)
                 .show());
     }
 
@@ -137,7 +137,7 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     public void onConnectionFailedRtmp(final String reason) {
         VideoStream.sendBroadCast(activity, "onConnectionFailed");
         runOnUiThread(() -> {
-            Toast.makeText(RTMP_Streamer.this, "Connection failed. " + reason,
+            Toast.makeText(RTMPStreamer.this, "Connection failed. " + reason,
                     Toast.LENGTH_SHORT).show();
             _stopStreaming();
         });
@@ -147,7 +147,7 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     public void onDisconnectRtmp() {
         VideoStream.sendBroadCast(activity, "onDisconnect");
         runOnUiThread(() -> {
-            Toast.makeText(RTMP_Streamer.this, "Disconnected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RTMPStreamer.this, "Disconnected", Toast.LENGTH_SHORT).show();
             _stopStreaming();
         });
     }
@@ -156,7 +156,7 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     public void onAuthErrorRtmp() {
         VideoStream.sendBroadCast(activity, "onAuthError");
         runOnUiThread(() -> {
-            Toast.makeText(RTMP_Streamer.this, "Auth error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(RTMPStreamer.this, "Auth error", Toast.LENGTH_SHORT).show();
             _stopStreaming();
         });
     }
@@ -164,11 +164,11 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     @Override
     public void onAuthSuccessRtmp() {
         VideoStream.sendBroadCast(activity, "onAuthSuccess");
-        runOnUiThread(() -> Toast.makeText(RTMP_Streamer.this, "Auth success", Toast.LENGTH_SHORT).show());
+        runOnUiThread(() -> Toast.makeText(RTMPStreamer.this, "Auth success", Toast.LENGTH_SHORT).show());
     }
 
     private void _broadcastRCV() {
-        IntentFilter filter = new IntentFilter(RTMP-Client.BROADCAST_FILTER);
+        IntentFilter filter = new IntentFilter(RTMPClient.BROADCAST_FILTER);
         activity.registerReceiver(br, filter);
     }
 

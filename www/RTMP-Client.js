@@ -6,7 +6,7 @@ rtmp_client.streamRTMP = function(uri, token, success, failure) {
     exec(
         success,
         failure,
-        'RTMP-Client',
+        'RTMPClient',
         'streamRTMP',
         [uri,token]
     );
@@ -17,7 +17,7 @@ rtmp_client.streamStop = function(success, failure) {
     exec(
         success,
         failure,
-        'RTMP-Client',
+        'RTMPClient',
         'streamStop',
         []
     );
