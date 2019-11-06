@@ -1,5 +1,26 @@
 var exec = require('cordova/exec');
+var rtmp_client = {};
 
-exports.coolMethod = function (arg0, success, error) {
-    exec(success, error, 'RTMP-Client', 'coolMethod', [arg0]);
+rtmp_client.streamRTMP = function(uri, success, failure) {
+    // fire
+    exec(
+        success,
+        failure,
+        'VideoStream',
+        'streamRTMP',
+        [uri]
+    );
 };
+
+rtmp_client.streamStop = function(success, failure) {
+    // fire
+    exec(
+        success,
+        failure,
+        'VideoStream',
+        'streamStop',
+        []
+    );
+};
+
+module.exports = rtmp_client;
