@@ -1,0 +1,25 @@
+{
+  "name": "rtmp-client-plugin",
+  "version": "0.0.1",
+  "description": "RTMP Stream Client for cordova",
+  "cordova": {
+    "id": "rtmp-client-plugin",
+    "platforms": [
+      "android"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/nyinyinyanlin/rtmp_client.git"
+  },
+  "keywords": [
+    "ecosystem:cordova",
+    "cordova-android"
+  ],
+  "author": "Nyi Nyi Nyan Lin",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nyinyinyanlin/rtmp_client/issues"
+  },
+  "homepage": "https://github.com/nyinyinyanlin/rtmp_client#readme"
+}
