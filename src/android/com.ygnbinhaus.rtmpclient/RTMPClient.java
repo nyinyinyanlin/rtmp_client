@@ -247,13 +247,13 @@ public class RTMPClient extends CordovaPlugin {
     private void _startRTMP(String uri, String token) {
         _broadcastRCV();
 
-        Intent intent = new Intent(mActivity, RTMP_Streamer.class);
+        Intent intent = new Intent(mActivity, RTMPStreamer.class);
         intent.putExtra("url", uri);
         intent.putExtra("token", token);
         mActivity.startActivity(intent);
     }
 
-    /*private void _filters(String methodName) {
+    private void _filters(String methodName) {
         Intent intent = new Intent();
         intent.setAction(BROADCAST_FILTER);
         intent.putExtra("method", methodName);
@@ -274,7 +274,7 @@ public class RTMPClient extends CordovaPlugin {
         intent.putExtra("method", methodName);
         intent.putExtra("option", option);
         mActivity.sendBroadcast(intent);
-    }*/
+    }
 
     private void _plugResultsKeep() {
         PluginResult pluginResult = new PluginResult(PluginResult.Status.NO_RESULT);
@@ -307,9 +307,5 @@ public class RTMPClient extends CordovaPlugin {
     private void _broadcastRCV() {
         IntentFilter filter = new IntentFilter(BROADCAST_LISTENER);
         mActivity.registerReceiver(br, filter);
-    }
-
-    public void scanFiles(Context ctx, File file) {
-        new SingleMediaScanner(ctx, file);
     }
 }
