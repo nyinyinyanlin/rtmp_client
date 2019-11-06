@@ -1,4 +1,4 @@
-package com.ygnbinhaus.rtmp;
+package com.ygnbinhaus.rtmpclient;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -47,13 +47,6 @@ import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
 
-/**
- * Author: Archie, Disono (webmonsph@gmail.com)
- * Website: https://webmons.com
- *
- * Created at: 1/09/2018
- */
-
 public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp {
     // 90, 180, 270 or 0
     private final String[] _orient = new String[]{"90", "180", "270", "0"};
@@ -97,7 +90,7 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         activity = this.cordovaInterface.getActivity();
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         setContentView(_getResource("rtsp_rtmp_streamer", "layout"));
 
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -187,20 +180,11 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
         ic_torch = findViewById(_getResource("ic_torch", "id"));
         ic_torch.setOnClickListener(v -> _toggleFlash());
 
-        ic_resolutions = findViewById(_getResource("ic_resolutions", "id"));
-        ic_resolutions.setOnClickListener(v -> _settingsDialog());
-
         ic_switch_camera = findViewById(_getResource("ic_switch_camera", "id"));
         ic_switch_camera.setOnClickListener(v -> _toggleCameraFace());
 
-        ic_preview_orientation = findViewById(_getResource("ic_preview_orientation", "id"));
-        ic_preview_orientation.setOnClickListener(v -> _changeOrientation());
-
         ic_broadcast = findViewById(_getResource("ic_broadcast", "id"));
         ic_broadcast.setOnClickListener(v -> _toggleStreaming());
-
-        ic_record = findViewById(_getResource("ic_record", "id"));
-        ic_record.setOnClickListener(v -> _toggleRecording());
 
         ic_closed = findViewById(_getResource("ic_closed", "id"));
         ic_closed.setOnClickListener(v -> _closedActivity());
@@ -215,7 +199,7 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
     }
 
     private void _startStreaming() {
-        int _w = 0;
+        /*int _w = 0;
         int _h = 0;
 
         this.resolutions = rtmpCameral.getResolutionsBack();
@@ -237,10 +221,10 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
         // video helper
         VideoHelper videoH = new VideoHelper();
         Log.d(TAG, "Res: " + _w + "x" + _h + " bitrate " + videoH.bitrate(_w, _h));
-
-        if (rtmpCameral.prepareAudio() && rtmpCameral.prepareVideo(_w, _h, 30, videoH.bitrate(_w, _h),
-                false, 0)) {
-            rtmpCameral.startStream(_url);
+        */
+        if (rtmpCameral.prepareAudio() && rtmpCameral.prepareVideo(640, 480, 24, 2500*1024,
+                false, 0, 90)) {
+            rtmpCameral.startStream(_url+"/"+_token);
             _toggleBtnImgVideo(true);
 
             VideoStream.sendBroadCast(activity, "onStartStream");
@@ -263,8 +247,6 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
         VideoStream.sendBroadCast(activity, "onStopStream");
 
         if (rtmpCameral.isStreaming()) {
-            // stop recording
-            _stopRecording();
 
             rtmpCameral.stopStream();
             rtmpCameral.stopPreview();
@@ -325,39 +307,6 @@ public class RTMP_Streamer extends CordovaActivity implements ConnectCheckerRtmp
             Toast.makeText(activity, e.getMessage(), Toast.LENGTH_SHORT).show();
             rtmpCameral.switchCamera();
         }
-    }
-
-    private void _settingsDialog() {
-        if (this.resolutions == null) {
-            if (rtmpCameral == null) {
-                return;
-            }
-
-            this.resolutions = rtmpCameral.getResolutionsBack();
-        }
-
-        String[] resolutions = new String[this.resolutions.size()];
-        for (int i = 0; i < this.resolutions.size(); i++) {
-            resolutions[i] = this.resolutions.get(i).width + "x" + this.resolutions.get(i).height;
-        }
-
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setTitle("Change resolution");
-        builder.setItems(resolutions, (dialog, which) -> {
-            // the user clicked on colors[which]
-            Log.d(TAG, "Selected: " + resolutions[which] + " " +
-                    this.resolutions.get(which).width + "x" + this.resolutions.get(which).height);
-
-            this.selectedWidth = this.resolutions.get(which).width;
-            this.selectedHeight = this.resolutions.get(which).height;
-
-            if (this.rtmpCameral.isStreaming()) {
-                this._stopStreaming();
-
-                new android.os.Handler().postDelayed(this::_startStreaming, 1000);
-            }
-        });
-        builder.show();
     }
 
     private void _closedActivity() {

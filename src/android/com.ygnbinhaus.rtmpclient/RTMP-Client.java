@@ -1,4 +1,4 @@
-package rtmp-client-plugin;
+package com.ygnbinhaus.rtmpclient;
 
 import android.Manifest;
 import android.app.Activity;
@@ -19,8 +19,8 @@ import org.json.JSONObject;
 import java.io.File;
 
 public class RTMP-Client extends CordovaPlugin {
-    public final static String BROADCAST_LISTENER = "com.webmons.disono.rtmpandrtspstreamer.results";
-    public final static String BROADCAST_FILTER = "com.webmons.disono.rtmpandrtspstreamer";
+    public final static String BROADCAST_LISTENER = "package com.ygnbinhaus.rtmpclient.results";
+    public final static String BROADCAST_FILTER = "com.ygnbinhaus.rtmpclient";
     private final static String TAG = "RTMP-Client";
     private static final String RECORD_AUDIO = Manifest.permission.RECORD_AUDIO;
     private static final String CAMERA = Manifest.permission.CAMERA;
