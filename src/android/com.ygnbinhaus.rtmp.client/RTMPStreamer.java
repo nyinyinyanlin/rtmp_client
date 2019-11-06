@@ -1,4 +1,4 @@
-package com.ygnbinhaus.rtmpclient;
+package com.ygnbinhaus.rtmp.client;
 
 import android.app.Activity;
 import android.app.AlertDialog;

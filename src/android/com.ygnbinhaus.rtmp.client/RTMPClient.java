@@ -1,4 +1,6 @@
-package com.ygnbinhaus.rtmpclient;
+package com.ygnbinhaus.rtmp.client;
+
+import RTMPStreamer;
 
 import android.Manifest;
 import android.app.Activity;
@@ -48,19 +50,19 @@ public class RTMPClient extends CordovaPlugin {
                     } else if (method == "onConnectionFailed"){
                         _plugResultError("Connection failed.");
 
-                    }else  if (action == "onDisconnect"){
+                    }else  if (method == "onDisconnect"){
                             _plugResultError("Disconnected from the stream server.");
 
-                    }else if (action == "onAuthError"){
+                    }else if (method == "onAuthError"){
                             _plugResultError("Authentication error, invalid credentials.");
 
-                    }else  if (action == "onStartStream"){
+                    }else  if (method == "onStartStream"){
                             _cordovaSendResult("onStartStream", data);
 
-                    }else  if (action == "onStopStream") {
+                    }else  if (method == "onStopStream") {
                             _cordovaSendResult("onStopStream", data);
 
-                    }else  if (action == "onError") {
+                    }else  if (method == "onError") {
                         if (data != null) {
                             try {
                                 JSONObject obj = new JSONObject(data);
@@ -72,16 +74,16 @@ public class RTMPClient extends CordovaPlugin {
                         } else {
                             _plugResultError("Unknown error occurred.");
                         }
-                    }else   if (action == "onCommentSend") {
+                    }else   if (method == "onCommentSend") {
                         _cordovaSendResult("onCommentSend", data);
-                    }else  if (action == "onCommentItemSelected"){
+                    }else  if (method == "onCommentItemSelected"){
                             _cordovaSendResult("onCommentItemSelected", data);
                     }
                 }
             }
         }
     };
-    
+
     private Activity mActivity;
     private String[] permissions = {WRITE_EXTERNAL_STORAGE, CAMERA, RECORD_AUDIO, MODIFY_AUDIO_SETTINGS,
             READ_EXTERNAL_STORAGE, WAKE_LOCK};
