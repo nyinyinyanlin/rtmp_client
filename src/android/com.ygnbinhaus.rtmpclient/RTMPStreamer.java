@@ -76,11 +76,12 @@ public class RTMPStreamer extends CordovaActivity implements ConnectCheckerRtmp 
                 String method = intent.getStringExtra("method");
 
                 if (method != null) {
-                    switch (method) {
+                    if (method == "stop") _stopStreaming();
+                    /*switch (method) {
                         case "stop":
                             _stopStreaming();
                             break;
-                    }
+                    }*/
                 }
             }
         }

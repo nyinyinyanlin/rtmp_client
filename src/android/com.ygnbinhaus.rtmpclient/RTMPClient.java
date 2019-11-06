@@ -43,64 +43,45 @@ public class RTMPClient extends CordovaPlugin {
                 Log.d(TAG, "Method: " + method + " Data: " + data);
 
                 if (method != null) {
-                    switch (method) {
-                        case "onConnectionSuccess":
-                            _cordovaSendResult("onConnectionSuccess", data);
+                    if (method == "onConnectionSuccess") {
+                        _cordovaSendResult("onConnectionSuccess", data);
+                    } else if (method == "onConnectionFailed"){
+                        _plugResultError("Connection failed.");
 
-                            break;
-                        case "onConnectionFailed":
-                            _plugResultError("Connection failed.");
-
-                            break;
-                        case "onDisconnect":
+                    }else  if (action == "onDisconnect"){
                             _plugResultError("Disconnected from the stream server.");
 
-                            break;
-                        case "onAuthError":
+                    }else if (action == "onAuthError"){
                             _plugResultError("Authentication error, invalid credentials.");
 
-                            break;
-                        case "onAuthSuccess":
-                            _cordovaSendResult("onAuthSuccess", data);
-
-                            break;
-                        case "onStartStream":
+                    }else  if (action == "onStartStream"){
                             _cordovaSendResult("onStartStream", data);
 
-                            break;
-
-                        case "onStopStream":
+                    }else  if (action == "onStopStream") {
                             _cordovaSendResult("onStopStream", data);
 
-                            break;
-
-                        case "onError":
-                            if (data != null) {
-                                try {
-                                    JSONObject obj = new JSONObject(data);
-                                    _plugResultError(obj.getString("message"));
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                    _plugResultError(e.getMessage());
-                                }
-                            } else {
-                                _plugResultError("Unknown error occurred.");
+                    }else  if (action == "onError") {
+                        if (data != null) {
+                            try {
+                                JSONObject obj = new JSONObject(data);
+                                _plugResultError(obj.getString("message"));
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                                _plugResultError(e.getMessage());
                             }
-
-                            break;
-                        case "onCommentSend":
-                            _cordovaSendResult("onCommentSend", data);
-
-                            break;
-                        case "onCommentItemSelected":
+                        } else {
+                            _plugResultError("Unknown error occurred.");
+                        }
+                    }else   if (action == "onCommentSend") {
+                        _cordovaSendResult("onCommentSend", data);
+                    }else  if (action == "onCommentItemSelected"){
                             _cordovaSendResult("onCommentItemSelected", data);
-
-                            break;
                     }
                 }
             }
         }
     };
+    
     private Activity mActivity;
     private String[] permissions = {WRITE_EXTERNAL_STORAGE, CAMERA, RECORD_AUDIO, MODIFY_AUDIO_SETTINGS,
             READ_EXTERNAL_STORAGE, WAKE_LOCK};
@@ -177,7 +158,7 @@ public class RTMPClient extends CordovaPlugin {
         if (cordova.hasPermission(WRITE_EXTERNAL_STORAGE) && cordova.hasPermission(CAMERA) &&
                 cordova.hasPermission(RECORD_AUDIO) && cordova.hasPermission(MODIFY_AUDIO_SETTINGS) &&
                 cordova.hasPermission(READ_EXTERNAL_STORAGE)) {
-            switch (action) {
+            //switch (action) {
                 /*case "streamRTSP":
                     _startRTSP(url, null, null);
                     _plugResultsKeep();
@@ -188,16 +169,16 @@ public class RTMPClient extends CordovaPlugin {
                     _plugResultsKeep();
 
                     return true;*/
-                case "streamRTMP":
+                if (action == "streamRTMP") {
                     _startRTMP(url, token);
                     _plugResultsKeep();
-
                     return true;
-                case "streamStop":
+                } else if(action == "streamStop") {
                     _filters("stop");
                     _plugResultsKeep();
 
                     return true;
+                }
                 /*case "streamRTMPAuth":
                     _startRTMP(url, username, password);
                     _plugResultsKeep();
@@ -218,7 +199,7 @@ public class RTMPClient extends CordovaPlugin {
                     _plugResultsKeep();
 
                     return true;*/
-            }
+            //}
         } else {
             _getReadPermission(REQ_CODE);
             _plugResultsKeep();
