@@ -1,7 +1,7 @@
 var exec = require('cordova/exec');
 var rtmp_client = {};
 
-rtmp_client.streamRTMP = function(uri, success, failure) {
+rtmp_client.streamRTMP = function(uri, token, success, failure) {
     // fire
     exec(
         success,
