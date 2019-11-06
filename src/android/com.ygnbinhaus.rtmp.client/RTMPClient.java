@@ -1,7 +1,5 @@
 package com.ygnbinhaus.rtmp.client;
 
-import RTMPStreamer;
-
 import android.Manifest;
 import android.app.Activity;
 import android.content.BroadcastReceiver;
