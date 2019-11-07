@@ -1,5 +1,4 @@
 {
-<<<<<<< HEAD
   "name": "rtmp-client-plugin",
   "version": "0.0.1",
   "description": "RTMP Stream Client for cordova",
@@ -24,33 +23,3 @@
   },
   "homepage": "https://github.com/nyinyinyanlin/rtmp_client#readme"
 }
-=======
-  "name": "com.ygnbinhaus.rtmp",
-  "displayName": "RTMPClient",
-  "version": "1.0.0",
-  "description": "A sample Apache Cordova application that responds to the deviceready event.",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [
-    "ecosystem:cordova"
-  ],
-  "author": "Apache Cordova Team",
-  "license": "Apache-2.0",
-  "dependencies": {
-    "cordova-android": "^8.1.0"
-  },
-  "devDependencies": {
-    "cordova-plugin-whitelist": "^1.3.4"
-  },
-  "cordova": {
-    "plugins": {
-      "cordova-plugin-whitelist": {}
-    },
-    "platforms": [
-      "android"
-    ]
-  }
-}
->>>>>>> dd4a58368f3b68c638d2c1738eeb742ee287f3c8
