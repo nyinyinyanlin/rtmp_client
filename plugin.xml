@@ -1,6 +1,9 @@
 <?xml version='1.0' encoding='utf-8'?>
 <plugin id="rtmp-client-plugin" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>RTMP-Client</name>
+    <engines>
+        <engine name="cordova" version=">=3.0.0"/>
+    </engines>
     <js-module name="RTMP-Client" src="www/RTMP-Client.js">
         <clobbers target="cordova.plugins.RTMP-Client" />
     </js-module>
